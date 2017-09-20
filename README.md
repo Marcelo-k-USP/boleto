@@ -1,8 +1,12 @@
+Dependência do PHP (testado em Ubuntu 16.04):
 
-#Ver boleto no mercúrio:
-https://labs.uspdigital.usp.br/mercurioweb/merBoletoBancarioAcompanhar.jsp?codmnu=197
- 
+    apt-get install php php-curl 
 
-Baixar nusoap e aplicar patche
-//http://downloads.sourceforge.net/project/nusoap/nusoap/0.9.5/nusoap-0.9.5.zip
+Baixar nusoap:
 
+    composer install
+
+Rode o teste, há basicamente três métodos: gerar, situacao e getPDF:
+    
+    cd tests
+    php Boleto.php

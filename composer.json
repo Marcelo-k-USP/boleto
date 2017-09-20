@@ -1,0 +1,12 @@
+{
+    "name": "thiago/php_boletousp",
+    "authors": [
+        {
+            "name": "Thiago Gomes Verissimo",
+            "email": "thiago.verissimo@usp.br"
+        }
+    ],
+    "require": {
+        "econea/nusoap": "v0.9.5.3"
+    }
+}
