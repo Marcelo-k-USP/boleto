@@ -5,8 +5,12 @@ namespace Uspdev;
 class Boleto
 {
     private $clienteSoap;
-    public function __construct($user, $pass, $wsdl = './wsdl/prod.wsdl')
+    public function __construct($user, $pass, $wsdl = false)
     {
+	if (!$wsdl) {
+           $wsdl = getcwd() . '/vendor/uspdev/boleto/src/wsdl/prod.wsdl';
+        }
+
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
         $this->clienteSoap = new \nusoap_client($wsdl, 'wsdl');
         $erro = $this->clienteSoap->getError();
