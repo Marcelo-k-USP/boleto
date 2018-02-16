@@ -5,9 +5,7 @@ namespace Uspdev;
 class Boleto
 {
     private $clienteSoap;
-
-    public $wsdl_default = __DIR__ . './wsdl/prod.wsdl' ;
-    public function __construct($user, $pass, $wsdl = $this->wsdl_default)
+    public function __construct($user, $pass, $wsdl = './wsdl/prod.wsdl')
     {
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
         $this->clienteSoap = new \nusoap_client($wsdl, 'wsdl');
