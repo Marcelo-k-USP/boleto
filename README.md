@@ -11,6 +11,7 @@ Dependências do PHP (testado com php7.2):
 Essa classe, por enquanto contém 3 métodos: obter, gerar e situacao. 
 Para testá-los, adicione em seu arquivo PHP:
 
+    namespace meu\lindo\app;
     require 'vendor/autoload.php';
     use Uspdev\Boleto;
     $boleto = new Boleto('usuario','senha'); 
