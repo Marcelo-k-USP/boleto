@@ -10,13 +10,12 @@ class Boleto
     public function __construct($user, $pass, $wsdl = $this->wsdl_default)
     {
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
-
-        // Instanciando o cliente SOAP
         $this->clienteSoap = new \nusoap_client($wsdl, 'wsdl');
         $erro = $this->clienteSoap->getError();
-        if ($erro) print_r($erro);
-
-        // Indicando usuário e senha para acesso ao SOAP
+        if ($erro) {
+	    print_r($erro); 
+	    die();
+        }
         $this->clienteSoap->setHeaders(array('username' => $user,'password' => $pass));
     }
 
@@ -24,18 +23,17 @@ class Boleto
     {
         $request = $this->clienteSoap->call('gerarBoleto', array('requisicao' => $data));
 
-        //verifica se houve erro na geração do boleto.
-        if ($this->clienteSoap->fault) print_r($request["detail"]["WSException"]);
+        if ($this->clienteSoap->fault) {
+	    return $request["detail"]["WSException"];
+	}
         else {
-            $codigoIDBoleto = $request['identificacao']['codigoIDBoleto'];
+            return  $request['identificacao']['codigoIDBoleto'];
         }
-        return $codigoIDBoleto;
     }
 
     public function situacao($codigoIDBoleto){
         $param = array('codigoIDBoleto'=>$codigoIDBoleto);
-        $situacao = $this->clienteSoap->call('obterSituacao', array('identificacao'=>$param));
-        return $situacao;
+        return $this->clienteSoap->call('obterSituacao', array('identificacao'=>$param));
     }
 
     public function obter($codigoIDBoleto)
