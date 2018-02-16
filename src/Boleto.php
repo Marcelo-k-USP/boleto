@@ -8,10 +8,10 @@ class Boleto
 
     public function __construct($user, $pass, $wsdl="./wsdl/prod.wsql")
     {
-        require('../vendor/econea/nusoap/src/nusoap.php');
+        require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
 
         // Instanciando o cliente SOAP
-        $this->clienteSoap = new nusoap_client($wsdl, 'wsdl');
+        $this->clienteSoap = new \nusoap_client($wsdl, 'wsdl');
         $erro = $this->clienteSoap->getError();
         if ($erro) print_r($erro);
 
