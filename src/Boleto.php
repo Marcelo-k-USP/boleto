@@ -1,6 +1,6 @@
 <?php
 
-namespace Uspdev\Boleto;
+namespace Uspdev;
 
 class Boleto
 {
