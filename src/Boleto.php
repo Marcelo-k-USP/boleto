@@ -1,10 +1,12 @@
 <?php
 
+namespace Uspdev\Boleto;
+
 class Boleto
 {
     private $clienteSoap;
 
-    public function __construct($user, $pass, $wsdl)
+    public function __construct($user, $pass, $wsdl="./wsdl/prod.wsql")
     {
         require('../vendor/econea/nusoap/src/nusoap.php');
 
@@ -35,7 +37,7 @@ class Boleto
         return $situacao;
     }
 
-    public function getPDF($codigoIDBoleto)
+    public function obter($codigoIDBoleto)
     {
         $param = array('codigoIDBoleto' => $codigoIDBoleto);
 	      $request = $this->clienteSoap->call('obterBoleto', array('identificacao' => $param));
@@ -48,4 +50,4 @@ class Boleto
         echo base64_decode($request['boletoPDF']);
     }    
 }
-?>
+

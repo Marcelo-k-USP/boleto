@@ -1,12 +1,25 @@
 {
-    "name": "thiago/php_boletousp",
+    "name": "uspdev/boleto",
+    "version": "dev-master",
+    "minimum-stability": "dev",
+    "homepage": "https://github.com/uspdev/boleto",
+    "description": "Classe PHP para uso de boleto na USP",
+    "type": "library",
+    "license": "no usage restriction",
     "authors": [
         {
             "name": "Thiago Gomes Verissimo",
-            "email": "thiago.verissimo@usp.br"
+            "email": "thiago.verissimo@usp.br",
+            "homepage": "https://git.uspdigital.usp.br/u/5385361"
         }
     ],
+    "autoload": {
+        "psr-4" : {
+            "": "src/",
+            "Fflch\\Replicado\\" : "src"
+        }
+    },
     "require": {
-        "econea/nusoap": "v0.9.5.3"
+        "econea/nusoap": "dev-master"
     }
 }
