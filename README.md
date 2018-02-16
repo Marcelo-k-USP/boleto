@@ -41,5 +41,5 @@ Para testá-los, adicione em seu arquivo PHP:
     // situação
     print_r($boleto->situacao($id));
 
-    // obter PFD
-    $boleto->obter($id);
+    // com id gerado acima, é possível obter o PDF:
+    // $boleto->obter($id);
