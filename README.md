@@ -4,7 +4,7 @@ o composer:
     composer config repositories.boleto git https://github.com/uspdev/boleto.git
     composer require uspdev/boleto:dev-master
 
-Dependências do PHP:
+Dependências do PHP (testado com php7.2):
 
     apt-get install php php-curl 
 
