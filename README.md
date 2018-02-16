@@ -1,25 +1,25 @@
-API para uso de boleto na USP. Para usá-la em seu projeto PHP, adicioná-a com
+API para uso de boleto na USP. Para usÃ¡-la em seu projeto PHP, adicionÃ¡-a com
 o composer:
 
     composer config repositories.boleto git https://github.com/uspdev/boleto.git
     composer require uspdev/boleto:dev-master
 
-Dependências do PHP:
+DependÃªncias do PHP:
 
     apt-get install php php-curl 
 
-Essa classe, por enquanto contém 3 métodos: obter, gerar e situacao. 
-Para testá-los, adicione em seu arquivo PHP:
+Essa classe, por enquanto contÃ©m 3 mÃ©todos: obter, gerar e situacao. 
+Para testÃ¡-los, adicione em seu arquivo PHP:
 
     require 'vendor/autoload.php';
     use Uspdev\Boleto;
     $boleto = new Boleto('usuario','senha'); 
     
-    // array com campos mínimos para geração do boleto
+    //array com campos mÃ­nimos para geraÃ§Ã£o do boleto
     $data = array(
         'codigoUnidadeDespesa' => 8,
         'nomeFonte' => 'Taxas', 
-        'nomeSubfonte' => 'Congressos/Seminários/Palestras/Simpósios' , 
+        'nomeSubfonte' => 'Congressos/SeminÃ¡rios/Palestras/SimpÃ³sios' , 
         'estruturaHierarquica' => '\FFLCH\SCINFOR',   
         'codigoConvenio' => 0 ,  
         'dataVencimentoBoleto' => '10/11/2018', 
@@ -29,15 +29,15 @@ Para testá-los, adicione em seu arquivo PHP:
         'cpfCnpj' => '99999999999', 
         'nomeSacado' => 'Fulano',
         'codigoEmail' => 'fulano@usp.br',  
-        'informacoesBoletoSacado' => 'Qualquer informações que queira colocar',
-        'instrucoesObjetoCobranca' => 'Não receber após vencimento!'
+        'informacoesBoletoSacado' => 'Qualquer informaÃ§Ãµes que queira colocar',
+        'instrucoesObjetoCobranca' => 'NÃ£o receber apÃ³s vencimento!'
     );
 
     // gerar
     $id = $boleto->gerar($data);
     echo $id;
 
-    // situação
+    // situaÃ§Ã£o
     print_r($boleto->situacao($id));
 
     // obter PFD
