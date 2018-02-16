@@ -20,7 +20,7 @@ Para testá-los, adicione em seu arquivo PHP:
     $data = array(
         'codigoUnidadeDespesa' => 8,
         'nomeFonte' => 'Taxas', 
-        'nomeSubfonte' => 'Congressos/Seminários/Palestras/Simpósios' , 
+        'nomeSubfonte' => utf8_decode('Congressos/Seminários/Palestras/Simpósios') , 
         'estruturaHierarquica' => '\FFLCH\SCINFOR',   
         'codigoConvenio' => 0 ,  
         'dataVencimentoBoleto' => '10/11/2018', 
@@ -30,8 +30,8 @@ Para testá-los, adicione em seu arquivo PHP:
         'cpfCnpj' => '99999999999', 
         'nomeSacado' => 'Fulano',
         'codigoEmail' => 'fulano@usp.br',  
-        'informacoesBoletoSacado' => 'Qualquer informações que queira colocar',
-        'instrucoesObjetoCobranca' => 'Não receber após vencimento!'
+        'informacoesBoletoSacado' => utf8_decode('Qualquer informações que queira colocar'),
+        'instrucoesObjetoCobranca' => utf8_decode('Não receber após vencimento!')
     );
 
     // gerar
