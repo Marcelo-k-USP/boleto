@@ -1,11 +1,12 @@
-Dependências do PHP:
-
-    apt-get install php php-curl 
-
-Adicione essa biblioteca em seu projeto PHP:
+API para uso de boleto na USP. Para usá-la em seu projeto PHP, adicioná-a com
+o composer:
 
     composer config repositories.boleto git https://github.com/uspdev/boleto.git
     composer require uspdev/boleto:dev-master
+
+Dependências do PHP:
+
+    apt-get install php php-curl 
 
 Essa classe, por enquanto contém 3 métodos: obter, gerar e situacao. 
 Para testá-los, adicione em seu arquivo PHP:
