@@ -6,7 +6,8 @@ class Boleto
 {
     private $clienteSoap;
 
-    public function __construct($user, $pass, $wsdl="./wsdl/prod.wsql")
+    public $wsdl_default = __DIR__ . './wsdl/prod.wsdl' ;
+    public function __construct($user, $pass, $wsdl = $this->wsdl_default)
     {
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
 
