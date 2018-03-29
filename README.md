@@ -1,6 +1,6 @@
 API para uso de boleto na USP. Para usá-la em seu projeto PHP, com o composer rode:
 
-    composer require uspdev/boleto:dev-master
+    composer require uspdev/boleto
 
 Dependências do PHP (testado com php7.2):
 
