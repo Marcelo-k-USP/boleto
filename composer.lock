@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "282ab8a0ae112197db788c6a960c6fe8",
+    "content-hash": "3ba8c435f7e93e54b9bce9e1a38c3859",
     "packages": [
         {
             "name": "econea/nusoap",

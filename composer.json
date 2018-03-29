@@ -1,21 +1,19 @@
 {
     "name": "uspdev/boleto",
-    "version": "dev-master",
     "minimum-stability": "dev",
     "homepage": "https://github.com/uspdev/boleto",
     "description": "Classe PHP para uso de boleto na USP",
     "type": "library",
-    "license": "no usage restriction",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Thiago Gomes Verissimo",
             "email": "thiago.verissimo@usp.br",
-            "homepage": "https://git.uspdigital.usp.br/u/5385361"
+            "homepage": "https://github.com/thiagogomesverissimo"
         }
     ],
     "autoload": {
         "psr-4" : {
-            "": "src/",
             "Uspdev\\" : "src"
         }
     },
