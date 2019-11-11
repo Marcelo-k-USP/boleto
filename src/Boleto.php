@@ -8,7 +8,7 @@ class Boleto
     public function __construct($user, $pass, $wsdl = false)
     {
 	if (!$wsdl) {
-           $wsdl = getcwd() . '/vendor/uspdev/boleto/src/wsdl/prod.wsdl';
+           $wsdl = __DIR__ . '/../../../uspdev/boleto/src/wsdl/prod.wsdl';
         }
 
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
