@@ -23,6 +23,11 @@ class Boleto
 
     public function gerar($data)
     {
+	/* aqui esperamos que tudo cheguem em utf8 e convertemos utf8_decode*/
+	foreach($data as $key=>$value) {
+	    $data[$key] = utf8_decode($value);
+	}
+
         $request = $this->clienteSoap->call('gerarBoleto', array('requisicao' => $data));
 
         if ($this->clienteSoap->fault) {
