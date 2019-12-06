@@ -18,8 +18,7 @@ Para testá-los, adicione em seu arquivo PHP:
     //array com campos mínimos para geração do boleto
     $data = array(
         'codigoUnidadeDespesa' => 8,
-        'nomeFonte' => 'Taxas', 
-        'nomeSubfonte' => utf8_decode('Congressos/Seminários/Palestras/Simpósios') , 
+        'codigoFonteRecurso' => 32,
         'estruturaHierarquica' => '\FFLCH\SCINFOR',   
         'codigoConvenio' => 0 ,  
         'dataVencimentoBoleto' => '10/11/2018', 
@@ -30,7 +29,8 @@ Para testá-los, adicione em seu arquivo PHP:
         'nomeSacado' => 'Fulano',
         'codigoEmail' => 'fulano@usp.br',  
         'informacoesBoletoSacado' => utf8_decode('Qualquer informações que queira colocar'),
-        'instrucoesObjetoCobranca' => utf8_decode('Não receber após vencimento!')
+        'instrucoesObjetoCobranca' => utf8_decode('Não receber após vencimento!'),
+        'cepSacado' => '05508080'
     );
 
     // gerar

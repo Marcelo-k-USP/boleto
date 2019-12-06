@@ -28,7 +28,7 @@ class Boleto
 	    $data[$key] = utf8_decode($value);
 	}
 
-        $request = $this->clienteSoap->call('gerarBoleto', array('requisicao' => $data));
+        $request = $this->clienteSoap->call('gerarBoletoRegistrado', array('requisicao' => $data));
 
         if ($this->clienteSoap->fault) {
 	    return $request["detail"]["WSException"];
