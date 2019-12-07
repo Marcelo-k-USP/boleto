@@ -30,15 +30,18 @@ Para testá-los, adicione em seu arquivo PHP:
         'codigoEmail' => 'fulano@usp.br',  
         'informacoesBoletoSacado' => utf8_decode('Qualquer informações que queira colocar'),
         'instrucoesObjetoCobranca' => utf8_decode('Não receber após vencimento!'),
-        'cepSacado' => '05508080'
     );
 
+    /* O método gerar() retorna um array com dois indices:
+       status: true ou false indicando se o boleto foi ou não gerado
+       value: o id do boleto gerado ou a mensagem de erro 
+    */
     // gerar
-    $id = $boleto->gerar($data);
-    echo $id;
+    $r = $boleto->gerar($data);
+    if($r) echo $r['value'];
 
     // situação
-    print_r($boleto->situacao($id));
+    print_r($boleto->situacao($r['value']));
 
-    // com id gerado acima, é possível obter o PDF:
-    // $boleto->obter($id);
+    // obter o PDF:
+    // $boleto->obter($r['value']);

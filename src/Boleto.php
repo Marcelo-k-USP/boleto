@@ -30,11 +30,16 @@ class Boleto
 
         $request = $this->clienteSoap->call('gerarBoletoRegistrado', array('requisicao' => $data));
 
+        $data = [];
         if ($this->clienteSoap->fault) {
-        return $request["detail"]["WSException"];
-    }
+            $data['status'] = False;
+            $data['value'] = $request["detail"]["WSException"];
+            return $data;
+        }
         else {
-            return  $request['identificacao']['codigoIDBoleto'];
+            $data['status'] = True;
+            $data['value'] = $request['identificacao']['codigoIDBoleto'];
+            return $data;
         }
     }
 
@@ -46,14 +51,17 @@ class Boleto
     public function obter($codigoIDBoleto)
     {
         $param = array('codigoIDBoleto' => $codigoIDBoleto);
-          $request = $this->clienteSoap->call('obterBoleto', array('identificacao' => $param));
-          if ($this->clienteSoap->fault) print_r($request); 
-          if ($this->clienteSoap->getError())  print_r($request);
+        $request = $this->clienteSoap->call('obterBoleto', array('identificacao' => $param));
 
-        //redirecionando os dados binarios do pdf para o browser 
+        if ($this->clienteSoap->fault || $this->clienteSoap->getError()) {
+            print_r($request);
+            die();
+        }
+
+        //redirecionando os dados binarios do pdf para o browser
         header('Content-type: application/pdf'); 
         header('Content-Disposition: attachment; filename="boleto.pdf"'); 
         echo base64_decode($request['boletoPDF']);
-    }    
+    }
 }
 
