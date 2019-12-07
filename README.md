@@ -18,9 +18,7 @@ Para testá-los, adicione em seu arquivo PHP:
     //array com campos mínimos para geração do boleto
     $data = array(
         'codigoUnidadeDespesa' => 8,
-       /* 'codigoFonteRecurso' => 32, Por enquanto isso não funciona */
-        'nomeFonte' => '@codftercs', // Temporário
-        'nomeSubFonte' => 32, // Temporário
+        'codigoFonteRecurso' => 32,
         'estruturaHierarquica' => '\FFLCH\SCINFOR',   
         'codigoConvenio' => 0 ,  
         'dataVencimentoBoleto' => '10/11/2018', 
