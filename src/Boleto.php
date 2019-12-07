@@ -7,13 +7,18 @@ class Boleto
     private $clienteSoap;
     public function __construct($user, $pass, $wsdl = false)
     {
+        /* É possível passar o wsdl como parâmetro, por exemplo, no ambiente dev.
+           Se nada for passado, vamos assumir a url de produção */
         if (!$wsdl) {
-           $wsdl = 'https://uspdigital.usp.br/wsboleto/boleto?wsdl';
+           $wsdl = 'https://uspdigital.usp.br/wsboleto/wsdl/boleto.wsdl';
         }
 
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
+        //$this->clienteSoap = new \nusoap_client($wsdl, true);
         $this->clienteSoap = new \nusoap_client($wsdl, 'wsdl');
+
         $erro = $this->clienteSoap->getError();
+
         if ($erro) {
             print_r($erro); 
             die();
