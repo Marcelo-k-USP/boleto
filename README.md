@@ -28,8 +28,8 @@ Para testá-los, adicione em seu arquivo PHP:
         'cpfCnpj' => '99999999999', 
         'nomeSacado' => 'Fulano',
         'codigoEmail' => 'fulano@usp.br',  
-        'informacoesBoletoSacado' => utf8_decode('Qualquer informações que queira colocar'),
-        'instrucoesObjetoCobranca' => utf8_decode('Não receber após vencimento!'),
+        'informacoesBoletoSacado' => 'Qualquer informações que queira colocar',
+        'instrucoesObjetoCobranca' => 'Não receber após vencimento!',
     );
 
     /* O método gerar() retorna um array com dois indices:
