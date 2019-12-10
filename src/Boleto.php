@@ -33,7 +33,7 @@ class Boleto
             $data[$key] = utf8_decode($value);
         }
 
-        $request = $this->clienteSoap->call('gerarBoletoRegistrado', array('requisicao' => $data));
+        $request = $this->clienteSoap->call('gerarBoletoRegistrado', array('boletoRegistrado' => $data));
 
         $data = [];
         if ($this->clienteSoap->fault) {
