@@ -14,7 +14,6 @@ class Boleto
         }
 
         require_once __DIR__ . '/../../../econea/nusoap/src/nusoap.php';
-        //$this->clienteSoap = new \nusoap_client($wsdl, true);
         $this->clienteSoap = new \nusoap_client($wsdl, 'wsdl');
 
         $erro = $this->clienteSoap->getError();
@@ -38,7 +37,7 @@ class Boleto
         $data = [];
         if ($this->clienteSoap->fault) {
             $data['status'] = False;
-            $data['value'] = $request["detail"]["WSException"];
+            $data['value'] = utf8_encode($request["detail"]["WSException"]);
             return $data;
         }
         else {
