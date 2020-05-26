@@ -14,7 +14,7 @@ Para testá-los, adicione em seu arquivo PHP:
     require_once __DIR__ . '/vendor/autoload.php';
     use Uspdev\Boleto;
     $boleto = new Boleto('usuario','senha'); 
-    
+
     //array com campos mínimos para geração do boleto
     $data = array(
         'codigoUnidadeDespesa' => 8,
