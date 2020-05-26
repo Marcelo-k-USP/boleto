@@ -6,7 +6,7 @@ class Boleto
 {
     private $clienteSoap;
 
-    public function __construct($user, $pass, $dev = false)
+    public function __construct($user, $pass, $dev = False)
     {
         if (!$dev) {
            $wsdl = 'https://uspdigital.usp.br/wsboleto/wsdl/boleto.wsdl';
