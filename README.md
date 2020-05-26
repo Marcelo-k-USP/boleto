@@ -19,7 +19,7 @@ Para testá-los, adicione em seu arquivo PHP:
     $data = array(
         'codigoUnidadeDespesa' => 8,
         'codigoFonteRecurso' => 32,
-        'estruturaHierarquica' => '\FFLCH\SCINFOR',     
+        'estruturaHierarquica' => '\FFLCH\SCINFOR',
         'dataVencimentoBoleto' => '10/11/2018', 
         'valorDocumento' => 18.20,
         'tipoSacado' => 'PF', 
