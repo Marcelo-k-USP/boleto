@@ -28,7 +28,10 @@ Para testá-los, adicione em seu arquivo PHP:
     require_once __DIR__ . '/vendor/autoload.php';
     use Uspdev\Boleto;
 
-    $boleto = new Boleto('usuario','senha');
+	 // Inicialização do serviço com as credenciais criadas
+	 // [Ambiente de DEV] = ('consumerdi','teste1')
+	 // [Ambiente de PRD] = solicitar credenciais em https://servicos.sti.usp.br/ws-boleto/
+    $boleto = new Boleto('usuario','senha'); 
 
     /* array com campos mínimos para geração do boleto */
     $data = array(
@@ -45,19 +48,27 @@ Para testá-los, adicione em seu arquivo PHP:
         'instrucoesObjetoCobranca' => 'Não receber após vencimento!',
     );
 
+	// [Método Gerar] gerar boleto
     $gerar = $boleto->gerar($data);
     if($gerar['status']) {
         $id = $gerar['value'];
 
+		 // [Método Situacao] resgatar informações do boleto
         print_r($boleto->situacao($id));
 
-        //redirecionando os dados binarios do pdf para o browser
+		 // [Método Obter] recupera o arquivo PDF do boleto 
+		 // (PDF no formato binário codificado para Base64)        
         $obter = $boleto->obter($codigoIDBoleto);
+        
+        //redirecionando os dados binarios do pdf para o browser
         header('Content-type: application/pdf'); 
         header('Content-Disposition: attachment; filename="boleto.pdf"'); 
         echo base64_decode($obter['value']);
+        
+       // [Método Cancelar] cancelar boleto		
+		$boleto->cancelar($id);
     }
-
+    
 
 
 
