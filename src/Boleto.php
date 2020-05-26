@@ -59,15 +59,17 @@ class Boleto
         $param = array('codigoIDBoleto' => $codigoIDBoleto);
         $request = $this->clienteSoap->call('obterBoleto', array('identificacao' => $param));
 
+        $data = [];
         if ($this->clienteSoap->fault || $this->clienteSoap->getError()) {
-            print_r($request);
-            die();
+            $data['status'] = False;
+            $data['value'] = utf8_encode($request["detail"]["WSException"]);
+            return $data;
         }
-
-        //redirecionando os dados binarios do pdf para o browser
-        header('Content-type: application/pdf'); 
-        header('Content-Disposition: attachment; filename="boleto.pdf"'); 
-        echo base64_decode($request['boletoPDF']);
+        else {
+            $data['status'] = True;
+            $data['value'] = $request['boletoPDF'];
+            return $data;
+        }
     }
 }
 
