@@ -71,5 +71,31 @@ class Boleto
             return $data;
         }
     }
+
+    public function cancelar($codigoIDBoleto)
+    {
+        $param = array('codigoIDBoleto' => $codigoIDBoleto);
+        $request = $this->clienteSoap->call('cancelarBoleto', array('identificacao' => $param));
+
+        $data = [];
+        if ($this->clienteSoap->fault) {
+            $data['status'] = False;
+            $data['value'] = utf8_encode($request["detail"]["WSException"]);
+            return $data;
+        }
+        else {
+            $data['status'] = True;
+            $data['value'] = [];
+            $data['value']['situacao'] = $request['situacao']['statusBoletoBancario'];
+            $data['value']['valorCobrado'] = $request['situacao']['valorCobrado'];
+            $data['value']['valorEfetivamentePago'] = $request['situacao']['valorEfetivamentePago'];
+            $data['value']['dataVencimentoBoleto'] = $request['situacao']['dataVencimentoBoleto'];
+            $data['value']['dataEfetivaPagamento'] = $request['situacao']['dataEfetivaPagamento'];
+            $data['value']['dataRegistro'] = $request['situacao']['dataRegistro'];
+            $data['value']['dataCancelamentoRegistro'] = $request['situacao']['dataCancelamentoRegistro'];
+            return $data;
+        }
+    }
+    
 }
 
