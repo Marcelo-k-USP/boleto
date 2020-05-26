@@ -52,7 +52,7 @@ Para testá-los, adicione em seu arquivo PHP:
         print_r($boleto->situacao($id));
 
         //redirecionando os dados binarios do pdf para o browser
-        $obter = obter($codigoIDBoleto);
+        $obter = $boleto->obter($codigoIDBoleto);
         header('Content-type: application/pdf'); 
         header('Content-Disposition: attachment; filename="boleto.pdf"'); 
         echo base64_decode($obter['value']);
