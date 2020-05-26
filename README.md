@@ -1,21 +1,36 @@
-Biblioteca para uso de boleto na USP. Para usá-la em seu projeto PHP, com o composer rode:
+## Boleto USP
+
+Biblioteca que abstrai as chamadas do
+SOAP para métodos no contexto dos boleto na USP.
+
+Para usá-la em seu projeto PHP:
 
     composer require uspdev/boleto
 
-Dependências do PHP (testado com php7.2):
+Dependências mínimas do PHP:
 
-    apt-get install php php-curl 
+    apt-get install php php-curl
 
-Essa classe, por enquanto contém 3 métodos: obter, gerar e situacao. 
+Métodos disponíveis: 
+
+ - gerar($data): recebe um array com os dados para geração do boleto (veja exemplo abaixo) e devolve outro com uma chave boleana *status* indicando se o boleto foi gerado e uma chave *value* que contém o id do boleto ou a mensagem de erro.
+ - situacao($codigoIDBoleto): obtém situação do boleto 
+ - obter($codigoIDBoleto): recebe uma string com id do boleto e devolve a uma string em base64 para geração do PDF. O retorno é um array com uma chave boleana *status* indicando se a string base64 foi gerada e uma chave *value* que contém tal string.
+ - cancelar($codigoIDBoleto): TODO.
+
+## Exemplo de utilização:
+
 Para testá-los, adicione em seu arquivo PHP:
 
     <?php
+
     namespace Meu\Lindo\App;
     require_once __DIR__ . '/vendor/autoload.php';
     use Uspdev\Boleto;
+
     $boleto = new Boleto('usuario','senha');
 
-    //array com campos mínimos para geração do boleto
+    /* array com campos mínimos para geração do boleto */
     $data = array(
         'codigoUnidadeDespesa' => 8,
         'codigoFonteRecurso' => 32,
@@ -30,16 +45,19 @@ Para testá-los, adicione em seu arquivo PHP:
         'instrucoesObjetoCobranca' => 'Não receber após vencimento!',
     );
 
-    /* O método gerar() retorna um array com dois indices:
-       status: true ou false indicando se o boleto foi ou não gerado
-       value: o id do boleto gerado ou a mensagem de erro 
-    */
-    // gerar
-    $r = $boleto->gerar($data);
-    if($r['status']) echo $r['value'];
+    $gerar = $boleto->gerar($data);
+    if($gerar['status']) {
+        $id = $gerar['value'];
 
-    // situação
-    print_r($boleto->situacao($r['value']));
+        print_r($boleto->situacao($id));
 
-    // obter o PDF:
-    // $boleto->obter($r['value']);
+        //redirecionando os dados binarios do pdf para o browser
+        $obter = obter($codigoIDBoleto);
+        header('Content-type: application/pdf'); 
+        header('Content-Disposition: attachment; filename="boleto.pdf"'); 
+        echo base64_decode($obter['value']);
+    }
+
+
+
+
