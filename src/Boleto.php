@@ -35,7 +35,7 @@ class Boleto
 
         $request = $this->clienteSoap->call('gerarBoletoRegistrado', array('boletoRegistrado' => $data));
 
-        $data = [];
+        $data = array();
         if ($this->clienteSoap->fault) {
             $data['status'] = False;
             $data['value'] = utf8_encode($request["detail"]["WSException"]);
@@ -50,15 +50,34 @@ class Boleto
 
     public function situacao($codigoIDBoleto){
         $param = array('codigoIDBoleto'=>$codigoIDBoleto);
-        return $this->clienteSoap->call('obterSituacao', array('identificacao'=>$param));
+        $request = $this->clienteSoap->call('obterSituacao', array('identificacao'=>$param));
+        
+        $data = array();
+        if ($this->clienteSoap->fault || $this->clienteSoap->getError()) {
+            $data['status'] = False;
+            $data['value'] = utf8_encode($request["detail"]["WSException"]);
+            return $data;
+        }
+        else {
+            $data['status'] = True;
+            $data['value'] = array();
+            $data['value']['situacao'] = $request['situacao']['statusBoletoBancario'];
+            $data['value']['valorCobrado'] = $request['situacao']['valorCobrado'];
+            $data['value']['valorEfetivamentePago'] = $request['situacao']['valorEfetivamentePago'];
+            $data['value']['dataVencimentoBoleto'] = $request['situacao']['dataVencimentoBoleto'];
+            $data['value']['dataEfetivaPagamento'] = $request['situacao']['dataEfetivaPagamento'];
+            $data['value']['dataRegistro'] = $request['situacao']['dataRegistro'];
+            $data['value']['dataCancelamentoRegistro'] = $request['situacao']['dataCancelamentoRegistro'];
+            return $data;
+        }
     }
-
+    
     public function obter($codigoIDBoleto)
     {
         $param = array('codigoIDBoleto' => $codigoIDBoleto);
         $request = $this->clienteSoap->call('obterBoleto', array('identificacao' => $param));
 
-        $data = [];
+        $data = array();
         if ($this->clienteSoap->fault || $this->clienteSoap->getError()) {
             $data['status'] = False;
             $data['value'] = utf8_encode($request["detail"]["WSException"]);
@@ -75,7 +94,7 @@ class Boleto
         $param = array('codigoIDBoleto' => $codigoIDBoleto);
         $request = $this->clienteSoap->call('cancelarBoleto', array('identificacao' => $param));
 
-        $data = [];
+        $data = array();
         if ($this->clienteSoap->fault) {
             $data['status'] = False;
             $data['value'] = utf8_encode($request["detail"]["WSException"]);
@@ -83,7 +102,7 @@ class Boleto
         }
         else {
             $data['status'] = True;
-            $data['value'] = [];
+            $data['value'] = array();
             $data['value']['situacao'] = $request['situacao']['statusBoletoBancario'];
             $data['value']['valorCobrado'] = $request['situacao']['valorCobrado'];
             $data['value']['valorEfetivamentePago'] = $request['situacao']['valorEfetivamentePago'];
