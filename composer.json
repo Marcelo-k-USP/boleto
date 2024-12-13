@@ -18,6 +18,6 @@
         }
     },
     "require": {
-        "econea/nusoap": "0.9.7"
+        "econea/nusoap": "0.9.17"
     }
 }
