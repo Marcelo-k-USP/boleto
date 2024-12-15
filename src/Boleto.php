@@ -54,7 +54,7 @@ class Boleto {
         $erro = $this->clienteSoap->getError();
         
         if ($erro) {            
-            $return['value'] = utf8_encode($erro);
+                $return['value'] = utf8_encode($erro) . ' - ' . $this->obterDetalheErro($this->clienteSoap->response);
         } else {
             $return['status'] = True;
             if(!empty($request) && is_array($request)) {        
@@ -63,6 +63,35 @@ class Boleto {
         }
         
         return $return;        
+    }
+
+    private function obterDetalheErro($rawResponse) {
+        $step = 0;
+
+        try {
+            $step = 10;
+            $startPos = strpos($rawResponse, '<?xml');
+
+            $step = 20;
+            $xmlContent = substr($rawResponse, $startPos);
+
+            $step = 30;
+            $xml = new \SimpleXMLElement($xmlContent);
+
+            $step = 40;
+            $xml->registerXPathNamespace('S', 'http://schemas.xmlsoap.org/soap/envelope/');
+
+            $step = 50;
+            $xml->registerXPathNamespace('ns2', 'http://ws.boleto.usp/');
+
+            $step = 60;
+            $faultDetail = $xml->xpath('//S:Fault/detail/ns2:WSException')[0];
+
+            $step = 70;
+            return (string) $faultDetail;
+        } catch (\Exception $e) {
+            return 'Não foi possível obter detalhe do erro ocorrido no WSBoleto, pois ocorreu o erro ' . $e->getMessage() . ' no passo ' . $step . ' do método obterDetalheErro do uspdev/boleto/Boleto.php. O XML recebido foi: ' . json_encode($xmlContent);
+        }
     }
 
     /**
