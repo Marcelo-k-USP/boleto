@@ -54,7 +54,7 @@ class Boleto {
         $erro = $this->clienteSoap->getError();
         
         if ($erro) {            
-                $return['value'] = utf8_encode($erro) . ' - ' . $this->obterDetalheErro($this->clienteSoap->response);
+            $return['value'] = utf8_encode($erro) . ' - ' . $this->obterDetalheErro($this->clienteSoap->response);
         } else {
             $return['status'] = True;
             if(!empty($request) && is_array($request)) {        
@@ -110,7 +110,7 @@ class Boleto {
         $erro = $this->clienteSoap->getError();
         
         if ($erro) {
-            $return['value'] = utf8_encode($erro);
+            $return['value'] = utf8_encode($erro) . ' - ' . $this->obterDetalheErro($this->clienteSoap->response);
         } else {
             $return['status'] = True;
             if(!empty($request) && is_array($request)) {
@@ -144,7 +144,7 @@ class Boleto {
         $erro = $this->clienteSoap->getError();
         
         if ($erro) {
-            $return['value'] = utf8_encode($erro);
+            $return['value'] = utf8_encode($erro) . ' - ' . $this->obterDetalheErro($this->clienteSoap->response);
         } else {
             $return['status'] = True;
             if(!empty($request)) {
@@ -173,7 +173,7 @@ class Boleto {
         $erro = $this->clienteSoap->getError();
         
         if ($erro) {
-            $return['value'] = utf8_encode($erro);
+            $return['value'] = utf8_encode($erro) . ' - ' . $this->obterDetalheErro($this->clienteSoap->response);
         } else {
             $return['status'] = True;
             if(!empty($request) && is_array($request)) {
